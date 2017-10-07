@@ -1,0 +1,40 @@
+<section class="" style="margin-top: 20px;">
+    <form class="example-form">
+      <table class="table table-bordered table-hover text-center" border="0">
+        <thead>
+          <th class="text-center">°</th>
+          <th class="text-center">Nombre</th>
+          <th class="text-center">Dirección</th>
+          <th class="text-center">Estrato</th>
+          <th class="text-center">Genero</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let customer of customerService.customerList">
+            <td>
+              <md-checkbox></md-checkbox>
+            </td>
+            <td>
+             {{customer.name}}
+            </td>
+            <td>
+                {{customer.address}}
+            </td>
+            <td>             
+                {{customer.stratum}}               
+            </td>
+            <td>
+                {{genderOptions[customer.gender]}}
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="5" class="text-right">
+              <button md-raised-button color="primary">Agregar cliente</button>
+              <button md-raised-button color="warn">Eliminar</button>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </form>
+  </section>

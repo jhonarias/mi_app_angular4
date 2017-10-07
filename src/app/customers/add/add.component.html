@@ -1,35 +1,44 @@
 <section class="" style="margin-bottom: 20px;">
-  <form>
+  <form class="example-form" #addForm="ngForm">
     <div class="form-group">
-      <label for="nombre">Nombre</label>
-      <input type="text" class="form-control" id="nombre" placeholder="Nombre">
+      <md-form-field class="example-full-width">
+        <input mdInput placeholder="Nombre" value="" [(ngModel)]="customer.name" name="name" #name="ngModel" required>
+        <md-error *ngIf="!name.valid && !name.pristine">
+          Por favor ingresa el nombre
+        </md-error>
+      </md-form-field>
     </div>
     <div class="form-group">
-      <label for="direccion">Dirección</label>
-      <input type="text" class="form-control" id="direccion" placeholder="Dirección">
+      <md-form-field class="example-full-width">
+        <input mdInput placeholder="Dirección" value="" [(ngModel)]="customer.address" name="address" #address="ngModel" required>
+        <md-error *ngIf="!address.valid && !address.pristine">
+          Por favor ingresa la dirección
+        </md-error>
+      </md-form-field>
     </div>
 
     <div class="form-group">
-      <label for="estrato">Estrato</label>
-      <select class="form-control" id="estrato" placeholder="Estrato">
-              <option>1</option>
-              <option>2</option>
-            </select>
+      <md-select placeholder="Estrato" floatPlaceholder="Estrato" [(ngModel)]="customer.stratum" name="stratum" #stratum="ngModel"
+        required>
+        <md-option>Selecciona el estrato</md-option>
+        <md-option *ngFor="let stratum of stratums" [value]="stratum.value">
+          {{ stratum.viewValue }}
+        </md-option>
+      </md-select>
+      <md-error *ngIf="!stratum.valid && !stratum.pristine">
+        Por favor ingresa el estrato
+      </md-error>
     </div>
     <div class="form-group">
-      <div class="radio">
-        <label>
-                    <input type="radio" name="gender" id="gender1" value="1" checked>
-                   Masculino
-                  </label>
-      </div>
-      <div class="radio">
-        <label>
-                    <input type="radio" name="gender" id="gender2" value="2">
-                    Femenino
-                  </label>
-      </div>
+      <md-radio-group [(ngModel)]="customer.gender" name="gender" #gender="ngModel" required>
+        <md-radio-button value="0" selected>Masculinio</md-radio-button>
+        <md-radio-button value="1">Femenino</md-radio-button>
+      </md-radio-group>
+      <md-error *ngIf="!gender.valid && !gender.pristine">
+        Por favor ingresa el genero
+      </md-error>
     </div>
-    <button type="submit" class="btn btn-info btn-sm">Guardar</button>
+    <button [disabled]="!addForm.valid" md-raised-button color="primary" (click)="onSaveClick()">Guardar</button>
+    <button md-raised-button color="primary" (click)="onNewClick()">Nuevo</button>
   </form>
 </section>
